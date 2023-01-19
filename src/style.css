@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*自定义css */
+
+.h-height{
+    height: 48rem;
+}
+
+.w-95_{
+    width: 80%;
+}
+
+.w-90_{
+    width: 95%;
+}
+
+/*声明字体*/
+@font-face {
+    font-family: 'pingfang';
+    src: url('../public/font/pingfang.ttf');
+  }
+
+/*声明字体*/
+@font-face {
+    font-family: 'pingfang_jian';
+    src: url('../public/font/苹方-简.ttf');
+}
+
+.pingfang{
+    font-family: 'pingfang';
+}
+
+.pingfang_jian{
+    font-family: 'pingfang_jian';
+}
