@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full bg-cover h-full p-2" style="background-image: url('../../../public/bg_deatied.png')">
+  <div class="w-full bg-cover h-full p-2" style="background-image: url('/bg_deatied.png')">
     <n-button @click="$router.back()">Back</n-button>
     <n-upload multiple directory-dnd action="http://127.0.0.1:3175/api/upload" :default-file-list="fileList"
       @finish="handleSuccess" class="mt-3" :max="5">

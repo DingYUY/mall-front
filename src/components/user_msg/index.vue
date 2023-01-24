@@ -2,7 +2,7 @@
  * @Author: 丁雨阳 dzyyyt@163.com
  * @Date: 2023-01-18 13:21:27
  * @LastEditors: 丁雨阳 dzyyyt@163.com
- * @LastEditTime: 2023-01-19 02:06:56
+ * @LastEditTime: 2023-01-20 09:38:01
  * @Description: 
  * 
  * Copyright (c) 2023 by 丁雨阳 dzyyyt@163.com, All Rights Reserved. 
@@ -59,10 +59,10 @@ import {onMounted, reactive, ref} from "vue";
 import { useMessage,useDialog  } from "naive-ui";
 
 import axios from "axios";
-let show=ref(false)
-let name=ref()
-let arr=reactive([])
-let head_img=ref()
+let show = ref(false)
+let name = ref()
+let arr = reactive([])
+let head_img = ref()
 let baseURl='http://localhost:3175'
 
 

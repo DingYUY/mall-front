@@ -1,0 +1,1 @@
+function e(t=8){return Math.random().toString(16).slice(2,2+t)}function o(t,i){const n=[];if(!i){for(let r=0;r<t;++r)n.push(r);return n}for(let r=0;r<t;++r)n.push(i(r));return n}export{e as c,o as i};

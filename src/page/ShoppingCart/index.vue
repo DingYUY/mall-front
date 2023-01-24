@@ -2,14 +2,14 @@
  * @Author: 丁雨阳 dzyyyt@163.com
  * @Date: 2023-01-18 13:21:27
  * @LastEditors: 丁雨阳 dzyyyt@163.com
- * @LastEditTime: 2023-01-18 22:57:02
+ * @LastEditTime: 2023-01-20 09:43:53
  * @Description: 
  * 
  * Copyright (c) 2023 by 丁雨阳 dzyyyt@163.com, All Rights Reserved. 
 -->
 <template>
   <div class="w-full" :class="{ 'flex justify-center flex-col items-center': shop_cart.length == 0 }">
-    <img v-if="shop_cart.length == 0" src="../../../public/购物车为空.png" class="w-72" alt="">
+    <img v-if="shop_cart.length == 0" src="/cartNull.png" class="w-72" alt="">
     <p v-if="shop_cart.length == 0" class="pingfang_jian text-xs mt-3">购物车暂无内容，请到广场购买</p>
     <div v-if="shop_cart.length == 0" class="pingfang text-xs font-bold bg-purple-500 mt-5 cursor-pointer
     transition

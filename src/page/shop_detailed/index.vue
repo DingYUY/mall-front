@@ -1,6 +1,6 @@
 <template>
   <div class="w-full p-2 " style="
-  background-image: url('../../../public/bg_deatied.png')
+  background-image: url('/bg_deatied.png')
   background-size: cover
 ">
     <n-button @click="router.back()" class="pingfang  rounded-xl font-bold ">Back</n-button>
@@ -122,7 +122,6 @@ function joinCart() {
     if (index != -1) {
       // 有该商品
       cart[index].count++
-      message.success('添加成功')
     } else {
       // 没有该商品
       cart.push({

@@ -2,14 +2,14 @@
  * @Author: 丁雨阳 dzyyyt@163.com
  * @Date: 2023-01-18 13:21:27
  * @LastEditors: 丁雨阳 dzyyyt@163.com
- * @LastEditTime: 2023-01-19 01:40:16
+ * @LastEditTime: 2023-01-20 09:42:48
  * @Description: 
  * 
  * Copyright (c) 2023 by 丁雨阳 dzyyyt@163.com, All Rights Reserved. 
 -->
 <template>
   <div class="w-full flex justify-center items-center ">
-    <img src="../../../public/1.Welcome%20(1).png" class="w-72 h-72" alt="">
+    <img src="/welcome_login.png" class="w-72 h-72" alt="">
     <div class="flex flex-col ml-24">
       <div class="pingfang_jian mb-5 font-bold text-purple-700">登录</div>
       <input type="text" v-model="user.name" class="bg-gray-100 p-2  text-xs outline-0 rounded-xl " placeholder="请输入姓名...">
@@ -60,7 +60,7 @@ function login(){
       localStorage.setItem('name',res.data.data.name)
       localStorage.setItem('id',res.data.data._id)
       localStorage.setItem('head_img',res.data.data.img_head)
-      location.reload()  
+      router.push('/')
     }else {
       message.warning(res.data.msg)
     }

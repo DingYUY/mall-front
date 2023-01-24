@@ -15,7 +15,7 @@
 
 
 
-  <div class="mt-7 flex w-full  border rounded-xl p-2" v-for="(item,index) in shop">
+  <div class="mt-7 flex w-full  border rounded-xl p-2" v-for="(item,index) in shop" :key="index">
     <img :src="item.img[0]"  class="w-44 h-44 object-cover rounded-xl" alt="">
     <div class="ml-3 flex w-full p-2 flex-col pingfang_jian justify-between ">
       <div class="text-xl">{{item.name}}</div>
