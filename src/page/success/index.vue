@@ -2,7 +2,7 @@
  * @Author: 丁雨阳 dzyyyt@163.com
  * @Date: 2023-01-18 13:21:27
  * @LastEditors: 丁雨阳 dzyyyt@163.com
- * @LastEditTime: 2023-01-20 09:43:59
+ * @LastEditTime: 2023-01-28 08:41:22
  * @Description: 
  * 
  * Copyright (c) 2023 by 丁雨阳 dzyyyt@163.com, All Rights Reserved. 
@@ -20,13 +20,13 @@
 </template>
 
 <script setup>
-import {onMounted} from "vue";
+import { onMounted } from "vue";
 import router from "../../router/index.js";
 
-onMounted(()=>{
-  setTimeout(()=>{
+onMounted(() => {
+  setTimeout(() => {
     router.push('/order')
-  },2000)
+  }, 2000)
 })
 </script>
 

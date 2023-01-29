@@ -2,7 +2,7 @@
  * @Author: 丁雨阳 dzyyyt@163.com
  * @Date: 2023-01-18 13:21:27
  * @LastEditors: 丁雨阳 dzyyyt@163.com
- * @LastEditTime: 2023-01-20 09:43:53
+ * @LastEditTime: 2023-01-28 18:08:31
  * @Description: 
  * 
  * Copyright (c) 2023 by 丁雨阳 dzyyyt@163.com, All Rights Reserved. 
@@ -22,12 +22,14 @@
           :key="index">
           <n-checkbox :value="item" />
           <img :src="item.img[0]" class="w-20 h-20 object-cover ml-3" alt="">
-          <div class="pingfang_jian  ml-3 w-44  overflow-hidden overflow-ellipsis whitespace-nowrap">{{ item.name }}</div>
+          <div class="pingfang_jian  ml-3 w-44  overflow-hidden overflow-ellipsis whitespace-nowrap">{{ item.name }}
+          </div>
           <div class="pingfang_jian text-gray-500 text-xs w-44 break-all">{{ item.introduce }}</div>
           <div class="pingfang_jian text-gray-500 text-xs w-44 break-all">单价:{{ item.price }}</div>
-          <div class="pingfang_jian text-gray-500 text-xs w-44 break-all">数量:{{ item.count }}</div>
-          <div class="pingfang_jian text-gray-500 text-xs flex ">操作:<div class="cursor-pointer pl-3 hover:underline">删除
-            </div>
+          <div class="pingfang_jian text-gray-500 text-xs flex items-center justify-end" style="    width: 34%;">
+              <div class="hover:underline p-2 bg-purple-700 text-white rounded" @click="add(item)">添加</div>
+          <div class="pingfang_jian text-gray-500 text-xs break-all ml-2 mr-2">数量:{{ item.count }}</div>
+              <div class="hover:underline bg-purple-700 text-white rounded p-2" @click="reduce(item,index)">减少</div>
           </div>
         </div>
       </n-checkbox-group>
@@ -53,6 +55,9 @@
 import { onMounted, reactive, ref } from "vue";
 import router from "../../router/index.js";
 import axios from "axios";
+import { useMessage, useDialog } from "naive-ui";
+const message = useMessage()
+
 //要修改cart
 let shop_cart = reactive(localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [])
 let result = reactive([])
@@ -82,7 +87,53 @@ function Pay() {
     })
     router.push(`/buy/` + JSON.stringify(arr))
   } else {
-    alert('请选择商品')
+    message.success('请添加商品')
+  }
+}
+
+
+//添加
+function add(item){
+  console.log(item)
+ let good_id=item.good_id
+  item.count++
+  //本地储存
+  let arr=JSON.parse(localStorage.getItem("cart"))
+  arr.forEach(item=>{
+    if(good_id==item.id){
+      item.count++
+    }
+  })
+  console.log(arr)
+  localStorage.setItem("cart",JSON.stringify(arr))
+}
+
+
+//减少
+function reduce(item,index){
+ let good_id=item.good_id
+
+  if(item.count>1){
+    item.count--
+    //本地储存
+    let arr=JSON.parse(localStorage.getItem("cart"))
+    arr.forEach(item=>{
+      if(good_id==item.id){
+        item.count--
+      }
+    })
+
+    localStorage.setItem("cart",JSON.stringify(arr))
+  }else{
+    result.splice(index,1)
+    let arr=JSON.parse(localStorage.getItem("cart"))
+    arr.forEach((item,index)=>{
+      if(good_id==item.id){
+        arr.splice(index,1)
+      }
+    })
+
+    localStorage.setItem("cart",JSON.stringify(arr))
   }
 }
 

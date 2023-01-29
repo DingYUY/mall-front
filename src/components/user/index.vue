@@ -2,7 +2,7 @@
  * @Author: 丁雨阳 dzyyyt@163.com
  * @Date: 2023-01-18 13:21:27
  * @LastEditors: 丁雨阳 dzyyyt@163.com
- * @LastEditTime: 2023-01-20 09:37:16
+ * @LastEditTime: 2023-01-28 18:25:15
  * @Description: 
  * 
  * Copyright (c) 2023 by 丁雨阳 dzyyyt@163.com, All Rights Reserved. 
@@ -88,6 +88,7 @@ function clearToken() {
   localStorage.removeItem("name")
   localStorage.removeItem("id")
   localStorage.removeItem("head_img")
+  localStorage.removeItem("cart")
   //刷新页面
   location.reload()
 }
