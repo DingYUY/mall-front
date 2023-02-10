@@ -1,7 +1,7 @@
 <template>
   <div class="w-full p-2 " style="
-  background-image: url('/bg_deatied.png')
-  background-size: cover
+  background-image: url('/bg_deatied.png');
+  background-size: cover;
 ">
     <n-button @click="router.back()" class="pingfang  rounded-xl font-bold ">Back</n-button>
 
@@ -30,7 +30,6 @@
       <div class="w-2/3 p-4 pingfang text-xs">
         简介:
         {{ shop.shop_title }}
-
         <div @click="joinCart" class="flex justify-between mt-12">
           <div class="text-white bg-purple-700 p-2
            transition cursor-pointer active:scale-50
@@ -39,12 +38,8 @@
             transition cursor-pointer active:scale-50
           p-2 text-white rounded-xl" @click="go_buy(id, '/buy', '支付')">立即购买</div>
         </div>
-
       </div>
     </div>
-
-
-
   </div>
 </template>
 
@@ -60,22 +55,20 @@ const dialog = useDialog()
 let id = ref()
 
 let shop = reactive({
-  name: "肯德基",
-  price: "$10",
-  address: "北京市海淀区中关村大街",
-  img: [
-    "https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg",
-    "https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel2.jpeg",
-  ],
-  author: "张娜英",
-  author_img: "../../../public/322025280_871949277285018_8326140459084594806_n.jpg",
+  name: "",
+  price: "",
+  address: "",
+  img: [],
+  author: "",
+  author_img: "",
   author_title: "这是用户的简介....",
-  shop_title: "肯德基是源自美国的快餐连锁店，总部设于肯塔基州路易维尔市，以炸鸡为主力产品。总体来说是全球第二大的餐饮连锁企业，仅次于麦当劳，截至2015年12月，在123个国家和地区拥有20,000+个分店。目前与必胜客、塔可钟同为美国跨国餐饮集团百胜旗下子公司。",
+  shop_title: "",
   id,
 })
 onMounted(() => {
   id.value = router.currentRoute.value.params.id
   axios.post('/getGoodsById', { goods_id: id.value }).then(res => {
+    console.log(res.data)
     if (res.data.code == 1) {
       shop.name = res.data.data[0].name
       shop.price = res.data.data[0].price
@@ -165,8 +158,6 @@ function jump(path, name, id) {
     }
   })
 }
-
-
 
 
 </script>

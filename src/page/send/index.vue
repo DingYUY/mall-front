@@ -44,10 +44,6 @@
       广场</div>
     <guangchang :data_obj="obj"></guangchang>
 
-
-
-
-
   </div>
 </template>
 

@@ -2,7 +2,7 @@
  * @Author: 丁雨阳 dzyyyt@163.com
  * @Date: 2023-02-07 10:25:49
  * @LastEditors: 丁雨阳 dzyyyt@163.com
- * @LastEditTime: 2023-02-10 13:52:32
+ * @LastEditTime: 2023-02-10 16:06:29
  * @Description: 
  * 
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved. 
@@ -113,6 +113,7 @@ ws.onmessage = (res) => {
 // 关闭websocket
 ws.onclose = () => {
   console.log('连接已关闭')
+  localStorage.setItem('orderMessage', JSON.stringify({}))
 }
 
 onUnmounted(() => {

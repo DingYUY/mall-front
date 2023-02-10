@@ -2,7 +2,7 @@
  * @Author: 丁雨阳 dzyyyt@163.com
  * @Date: 2023-01-18 13:21:27
  * @LastEditors: 丁雨阳 dzyyyt@163.com
- * @LastEditTime: 2023-01-28 18:29:47
+ * @LastEditTime: 2023-02-10 16:32:41
  * @Description: 
  * 
  * Copyright (c) 2023 by 丁雨阳 dzyyyt@163.com, All Rights Reserved. 
@@ -21,8 +21,8 @@
 
     <div class="w-full  mt-5 flex flex-col justify-center items-center p-2">
       <n-upload class="flex justify-center" show-file-list="false" @finish="uploadImg"
-        action="http://localhost:3175/api/upload">
-        <img :src="head_img" class="w-20 h-20  mx-atuo object-cover rounded-full" alt="">
+        action="http://localhost:3175/api/upload" style="cursor: pointer;">
+        <img :src="head_img" class="head-img w-20 h-20  mx-auto object-cover rounded-full" alt="">
       </n-upload>
 
       <p class="mt-3">{{ name }}</p>
@@ -134,4 +134,5 @@ function uploadImg(file) {
   width: 0px;
   height: 0px;
 }
+
 </style>
