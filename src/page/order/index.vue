@@ -2,7 +2,7 @@
  * @Author: 丁雨阳 dzyyyt@163.com
  * @Date: 2023-01-18 13:21:27
  * @LastEditors: 丁雨阳 dzyyyt@163.com
- * @LastEditTime: 2023-01-28 08:41:13
+ * @LastEditTime: 2023-02-10 14:33:55
  * @Description: 
  * 
  * Copyright (c) 2023 by 丁雨阳 dzyyyt@163.com, All Rights Reserved. 
@@ -19,15 +19,23 @@
       <div class="pingfang_jian text-gray-500 text-xs w-44 break-all mr-6">订单号:{{ item.order_id }}</div>
       <div
         class="pingfang_jian text-gray-500 text-xs w-44  overflow-ellipsis overflow-hidden whitespace-nowrap  hover:whitespace-pre-wrap ">
-        地址:{{ item.custorm_address }}
+        地址:{{ item.custorm_address.split('_')[0] }}
+      </div>
+      <div
+        class="pingfang_jian text-gray-500 text-xs w-44  overflow-ellipsis overflow-hidden whitespace-nowrap  hover:whitespace-pre-wrap ">
+        电话:{{ item.custorm_address.split('_')[1] }}
       </div>
 
 
-      <n-button class="ml-3" @click="editOrder(item._id, 1)" v-if="item.status == 0">发货</n-button>
-      <n-button class="ml-3" @click="editOrder(item._id, 2)" :disabled="id != item.user_id"
-        v-if="item.status == 1">收货</n-button>
-      <n-button class="ml-3" v-if="item.status == 2">订单完成</n-button>
-
+      <div style="width: 30%;">
+        <n-button v-if="item.user_id === id" class="ml-3" @click="go_chat(item)">联系卖家</n-button>
+        <n-button v-if="item.shop_id === id" class="ml-3" @click="go_chat(item)">联系买家</n-button>
+        <n-button class="ml-3" @click="editOrder(item._id, 1)"
+          v-if="item.status == 0 && item.shop_id === id">发货</n-button>
+        <n-button class="ml-3" @click="editOrder(item._id, 2)" :disabled="id != item.user_id"
+          v-if="item.status == 1 && item.user_id === id">收货</n-button>
+        <n-button class="ml-3" v-if="item.status == 2">订单完成</n-button>
+      </div>
     </div>
 
   </div>
@@ -36,10 +44,12 @@
 <script setup>
 import axios from "axios";
 import { onMounted, reactive, ref } from "vue";
-import router from "../../router/index.js";
+// import router from "../../router/index.js";
+import { useRouter } from "vue-router";
 import { useMessage, useDialog } from "naive-ui";
 const message = useMessage()
 const dialog = useDialog()
+const router = useRouter()
 let id = ref()
 let order = reactive([])
 id.value = localStorage.getItem('id')
@@ -51,7 +61,6 @@ axios.post('/getOrder', {
     order.push(...res.data.data)
   }
 })
-
 
 onMounted(() => {
   if (localStorage.getItem("token")) {
@@ -77,6 +86,14 @@ function editOrder(id, index) {
 
     //刷新页面
     window.location.reload()
+  })
+}
+
+// 联系卖家
+function go_chat(orderMessage) {
+  localStorage.setItem('orderMessage', JSON.stringify(orderMessage))
+  router.push({
+    path: '/chat'
   })
 }
 

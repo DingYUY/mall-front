@@ -2,7 +2,7 @@
  * @Author: 丁雨阳 dzyyyt@163.com
  * @Date: 2023-01-18 13:21:27
  * @LastEditors: 丁雨阳 dzyyyt@163.com
- * @LastEditTime: 2023-01-20 18:58:28
+ * @LastEditTime: 2023-02-09 10:55:35
  * @Description: 
  * 
  * Copyright (c) 2023 by 丁雨阳 dzyyyt@163.com, All Rights Reserved. 
@@ -12,6 +12,7 @@ import './style.css'
 import App from './App.vue'
 import router from "./router/index.js";
 import axios from "axios";
+
 
 // axios.defaults.baseURL = "http://124.222.246.206:3175";
 // const baseURl = "http://124.222.246.206:3175";

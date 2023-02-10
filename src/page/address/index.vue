@@ -18,7 +18,6 @@
     </div>
   </div>
 
-
   <n-modal v-model:show="add_address">
     <n-card
       style="width: 700px;background-image: url('/bg_deatied.png');background-size: contain; background-repeat: no-repeat"
@@ -167,7 +166,7 @@ function jump(path, name) {
       updown()
     },
     onNegativeClick: () => {
-      message.success('选择成功')
+      message.success('已取消')
     }
   })
 }

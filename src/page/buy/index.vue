@@ -127,7 +127,7 @@ function updown() {
       goods_name: item.name, //商品名字
       goods_title: item.introduce,  //商品介绍
       goods_id: item.good_id, //商品id
-      custorm_address: address.address + address.phone, //客户地址
+      custorm_address: address.address + '_' + address.phone, //客户地址
       img: item.img, //商品图片
     }).then(res => {
     })

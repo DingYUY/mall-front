@@ -24,36 +24,25 @@
 
     <div class="flex  items-center flex-col">
       <n-input-group class="flex items-center mt-24  justify-center">
-        <div class="pingfang_jian mr-3" >商品名字</div>
+        <div class="pingfang_jian mr-3">商品名字</div>
         <n-input placeholder="请输入商品名字" v-model:value="msg.shop_name" :style="{ width: '50%' }" />
-
       </n-input-group>
-
-
       <n-button-group style="width: 59%;" class="flex items-center mt-4">
         <div class="pingfang_jian mr-6" style="transform: translate(10px,0px);">商品价格</div>
         <!--     <n-button quaternary @click="add" type="success" round>+</n-button>-->
         <!--     <div class="p-2">{{msg.price}}</div>-->
         <!--     <n-button quaternary @click="sub" type="success" round>-</n-button>-->
-
         <n-input-number v-model:value="msg.price" clearable placeholder="请输入价格" />
-
-
       </n-button-group>
-
-
 
       <n-input-group class="flex items-center mt-4 justify-center">
         <div class="pingfang_jian mr-3">商品简介</div>
         <n-input placeholder="请输入商品简介" v-model:value="msg.introduce" :style="{ width: '50%' }" />
-
       </n-input-group>
 
-
       <n-input-group class="flex items-center mt-4 justify-center">
-        <div class="pingfang_jian mr-3">地址&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+        <div class="pingfang_jian mr-3">发货地址&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
         <n-input placeholder="请输入发货地址" type="textarea" v-model:value="msg.address" :style="{ width: '50%' }" />
-
       </n-input-group>
 
       <div class="flex justify-end pr-32 w-95_">
@@ -61,10 +50,6 @@
       </div>
 
     </div>
-
-
-
-
   </div>
 </template>
 

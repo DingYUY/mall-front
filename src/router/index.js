@@ -1,3 +1,12 @@
+/*
+ * @Author: 丁雨阳 dzyyyt@163.com
+ * @Date: 2023-01-18 13:21:27
+ * @LastEditors: 丁雨阳 dzyyyt@163.com
+ * @LastEditTime: 2023-02-09 09:53:08
+ * @Description: 
+ * 
+ * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved. 
+ */
 import { createRouter, createWebHashHistory } from "vue-router";
 
 const routes = [
@@ -51,6 +60,11 @@ const routes = [
       {
         path: "/jiaocheng",
         component: () => import("../page/jiaocheng/index.vue"),
+      },
+      {
+        path: "/chat",
+        component: () => import("../page/chat/index.vue"),
+        name: 'Chat'
       },
     ],
   },
