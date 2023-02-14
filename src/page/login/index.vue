@@ -2,7 +2,7 @@
  * @Author: 丁雨阳 dzyyyt@163.com
  * @Date: 2023-01-18 13:21:27
  * @LastEditors: 丁雨阳 dzyyyt@163.com
- * @LastEditTime: 2023-01-28 08:42:32
+ * @LastEditTime: 2023-02-14 16:24:32
  * @Description: 
  * 
  * Copyright (c) 2023 by 丁雨阳 dzyyyt@163.com, All Rights Reserved. 
@@ -68,17 +68,7 @@ function login() {
 
 
 function register() {
-  dialog.warning({
-    title: '将跳转到注册',
-    positiveText: '确定',
-    negativeText: '取消',
-    onPositiveClick: () => {
-      router.push('/register')
-    },
-    onNegativeClick: () => {
-      message.success('选择成功')
-    }
-  })
+  router.push('/register')
 }
 
 </script>

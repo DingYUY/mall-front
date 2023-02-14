@@ -58,7 +58,7 @@ import { onMounted, reactive } from "vue";
 import { useMessage, useDialog } from "naive-ui";
 import router from "../../router/index.js";
 import axios from "axios";
-const baseURl = "http://localhost:3175";
+const baseURl = "http://124.222.246.206:3175";
 const message = useMessage()
 const dialog = useDialog()
 
@@ -77,7 +77,7 @@ onMounted(() => {
   if (localStorage.getItem("token")) {
     return
   } else {
-    alert('请先登录')
+    message.warning('请先登录')
     router.push('/login')
   }
 });
