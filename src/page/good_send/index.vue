@@ -58,7 +58,7 @@ import { onMounted, reactive } from "vue";
 import { useMessage, useDialog } from "naive-ui";
 import router from "../../router/index.js";
 import axios from "axios";
-const baseURl = "http://124.222.246.206:3175";
+const baseURL = "http://124.222.246.206:3175";
 const message = useMessage()
 const dialog = useDialog()
 
@@ -104,7 +104,7 @@ function handleSuccess(file) {
 
 
   //拿到服务端返回的数据 nav
-  fileList.push(baseURl + `/public/` + year + month + day + size + hour + '.jpg')
+  fileList.push(baseURL + `/public/` + year + month + day + size + hour + '.jpg')
 }
 
 function createThumbnailUrl(file) {
