@@ -2,7 +2,7 @@
  * @Author: 丁雨阳 dzyyyt@163.com
  * @Date: 2023-01-18 13:21:27
  * @LastEditors: 丁雨阳 dzyyyt@163.com
- * @LastEditTime: 2023-01-28 08:41:26
+ * @LastEditTime: 2023-02-22 16:49:41
  * @Description: 
  * 
  * Copyright (c) 2023 by 丁雨阳 dzyyyt@163.com, All Rights Reserved. 
@@ -51,7 +51,7 @@ let user = reactive({
 })
 
 function register() {
-  axios.post('/addUser', { name: user.name, password: user.password }).then(res => {
+  axios.post('/addUser', { name: user.name, password: user.password, isManager: false }).then(res => {
     console.log(res)
     if (res.data.code == 1) {
       message.success('注册成功')

@@ -2,7 +2,7 @@
  * @Author: 丁雨阳 dzyyyt@163.com
  * @Date: 2023-01-18 13:21:27
  * @LastEditors: 丁雨阳 dzyyyt@163.com
- * @LastEditTime: 2023-02-09 09:53:08
+ * @LastEditTime: 2023-02-22 17:07:36
  * @Description: 
  * 
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved. 
@@ -65,6 +65,11 @@ const routes = [
         path: "/chat",
         component: () => import("../page/chat/index.vue"),
         name: 'Chat'
+      },
+      {
+        path: "/manage",
+        component: () => import("../page/manage/index.vue"),
+        name: 'Manage'
       },
     ],
   },

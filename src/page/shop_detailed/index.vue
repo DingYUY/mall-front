@@ -33,10 +33,10 @@
         <div @click="joinCart" class="flex justify-between mt-12">
           <div class="text-white bg-purple-700 p-2
            transition cursor-pointer active:scale-50
-           rounded-xl hover:scale-125 ">加入购物车</div>
+           rounded-xl hover:scale-125 " v-if="shop.user_id !== userId">加入购物车</div>
           <div class="bg-yellow-400 hover:scale-125
             transition cursor-pointer active:scale-50
-          p-2 text-white rounded-xl" @click="go_buy(id, '/buy', '支付')">立即购买</div>
+          p-2 text-white rounded-xl" v-if="shop.user_id !== userId" @click="go_buy(id, '/buy', '支付')">立即购买</div>
         </div>
       </div>
     </div>
@@ -51,6 +51,8 @@ import { useMessage, useDialog } from "naive-ui";
 const message = useMessage()
 const dialog = useDialog()
 
+const userId = localStorage.getItem('id')
+
 //查看router的参数 发送
 let id = ref()
 
@@ -64,6 +66,7 @@ let shop = reactive({
   author_title: "这是用户的简介....",
   shop_title: "",
   id,
+  user_id: ''
 })
 onMounted(() => {
   id.value = router.currentRoute.value.params.id
@@ -77,6 +80,7 @@ onMounted(() => {
       shop.address = res.data.data[0].address
       shop.author = res.data.data[0].username
       shop.author_img = res.data.data[0].user_img
+      shop.user_id = res.data.data[0].user_id
     } else {
       return
     }

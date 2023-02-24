@@ -2,7 +2,7 @@
  * @Author: 丁雨阳 dzyyyt@163.com
  * @Date: 2023-02-07 10:25:49
  * @LastEditors: 丁雨阳 dzyyyt@163.com
- * @LastEditTime: 2023-02-10 16:06:29
+ * @LastEditTime: 2023-02-15 14:01:37
  * @Description: 
  * 
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved. 
@@ -72,6 +72,7 @@ const sendList = reactive({
 const currentId = localStorage.getItem('id')
 
 let ws = new WebSocket('ws://127.0.0.1:3000')
+// let ws = new WebSocket('ws://124.222.246.206:3000')
 
 // 开启连接后客户端处理方法
 ws.onopen = () => {

@@ -2,7 +2,7 @@
  * @Author: 丁雨阳 dzyyyt@163.com
  * @Date: 2023-01-18 13:21:27
  * @LastEditors: 丁雨阳 dzyyyt@163.com
- * @LastEditTime: 2023-02-14 16:24:32
+ * @LastEditTime: 2023-02-22 20:54:16
  * @Description: 
  * 
  * Copyright (c) 2023 by 丁雨阳 dzyyyt@163.com, All Rights Reserved. 
@@ -52,13 +52,18 @@ function login() {
   axios.post('/login', { name: user.name, password: user.password }).then(res => {
     console.log(res)
     if (res.data.code == 1) {
-      message.success('登录成功')
-      //存入token
-      localStorage.setItem('token', res.data.data.password)
-      localStorage.setItem('name', res.data.data.name)
-      localStorage.setItem('id', res.data.data._id)
-      localStorage.setItem('head_img', res.data.data.img_head)
-      router.push('/')
+      if (res.data.data.isBan === false) {
+        message.success('登录成功')
+        //存入token
+        localStorage.setItem('token', res.data.data.password)
+        localStorage.setItem('name', res.data.data.name)
+        localStorage.setItem('id', res.data.data._id)
+        localStorage.setItem('head_img', res.data.data.img_head)
+        localStorage.setItem('isManager', res.data.data.isManager)
+        router.push('/')
+      } else {
+        message.error('该用户已被封禁')
+      }
     } else {
       message.warning(res.data.msg)
     }

@@ -2,7 +2,7 @@
  * @Author: 丁雨阳 dzyyyt@163.com
  * @Date: 2023-01-18 13:21:27
  * @LastEditors: 丁雨阳 dzyyyt@163.com
- * @LastEditTime: 2023-02-14 16:31:19
+ * @LastEditTime: 2023-02-23 09:51:16
  * @Description: 
  * 
  * Copyright (c) 2023 by 丁雨阳 dzyyyt@163.com, All Rights Reserved. 
@@ -21,11 +21,12 @@
 
     <div class="w-full  mt-5 flex flex-col justify-center items-center p-2">
       <n-upload class="flex justify-center" show-file-list="false" @finish="uploadImg"
-        action="http://localhost:3175/api/upload" style="cursor: pointer;">
+        action="http://127.0.0.1:3175/api/upload" style="cursor: pointer;">
         <img :src="head_img" class="head-img w-20 h-20  mx-auto object-cover rounded-full" alt="">
       </n-upload>
 
       <p class="mt-3">{{ name }}</p>
+      <p v-if="isManager === 'true'" style="display: inline-block; text-align: center; border: 1px solid #1d9fff; color: #1d9fff; padding: 0 2px; border-radius: 4px; cursor: pointer;" @click="toManage">管理员</p>
 
       <div class="pingfang mt-8 " style="font-size: 12px">我的发布</div>
 
@@ -59,8 +60,9 @@ let show = ref(false)
 let name = ref()
 let arr = reactive([])
 let head_img = ref()
-let baseURl = 'http://124.222.246.206:3175'
-
+// let baseURL = 'http://124.222.246.206:3175'
+let baseURL = 'http://127.0.0.1:3175'
+let isManager = localStorage.getItem('isManager')
 
 const message = useMessage()
 const dialog = useDialog()
@@ -70,6 +72,7 @@ router.afterEach((to, from) => {
   let token = localStorage.getItem("token")
   name.value = localStorage.getItem("name")
   head_img.value = localStorage.getItem('head_img')
+  isManager = localStorage.getItem('isManager')
 
   if (token) {
     //有登录信息
@@ -83,6 +86,7 @@ onMounted(() => {
   let token = localStorage.getItem("token")
   name.value = localStorage.getItem("name")
   head_img.value = localStorage.getItem('head_img')
+  isManager = localStorage.getItem('isManager')
   if (token) {
     //有登录信息
     show.value = true
@@ -115,15 +119,19 @@ function uploadImg(file) {
 
   axios.post('/setUserHead', {
     _id: localStorage.getItem('id'),
-    head_img: baseURl + `/public/` + year + month + day + size + hour + '.jpg'
+    head_img: baseURL + `/public/` + year + month + day + size + hour + '.jpg'
   }).then(res => {
     if (res.data.code == 1) {
       message.success('修改成功')
-      head_img.value = baseURl + `/public/` + year + month + day + size + hour + '.jpg'
-      localStorage.setItem('head_img', baseURl + `/public/` + year + month + day + size + hour + '.jpg')
+      head_img.value = baseURL + `/public/` + year + month + day + size + hour + '.jpg'
+      localStorage.setItem('head_img', baseURL + `/public/` + year + month + day + size + hour + '.jpg')
       location.reload()
     }
   })
+}
+
+function toManage() {
+  router.push('/manage')
 }
 
 </script>

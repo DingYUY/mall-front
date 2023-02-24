@@ -58,7 +58,8 @@ import { onMounted, reactive } from "vue";
 import { useMessage, useDialog } from "naive-ui";
 import router from "../../router/index.js";
 import axios from "axios";
-const baseURL = "http://124.222.246.206:3175";
+const baseURL = "http://127.0.0.1:3175";
+// const baseURL = "http://124.222.246.206:3175";
 const message = useMessage()
 const dialog = useDialog()
 
@@ -140,15 +141,15 @@ function updown() {
 
 function jump(path, name) {
   dialog.warning({
-    title: '你确定要' + name,
+    title: '确定要' + name + '吗',
     positiveText: '确定',
     negativeText: '取消',
     onPositiveClick: () => {
-      message.success('添加成功')
+      message.success('发布成功')
       updown()
     },
     onNegativeClick: () => {
-      message.success('选择成功')
+      message.info('已取消')
     }
   })
 }

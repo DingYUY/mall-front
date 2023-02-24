@@ -2,7 +2,7 @@
  * @Author: 丁雨阳 dzyyyt@163.com
  * @Date: 2023-01-18 13:21:27
  * @LastEditors: 丁雨阳 dzyyyt@163.com
- * @LastEditTime: 2023-01-28 18:25:15
+ * @LastEditTime: 2023-02-23 09:16:42
  * @Description: 
  * 
  * Copyright (c) 2023 by 丁雨阳 dzyyyt@163.com, All Rights Reserved. 
@@ -57,7 +57,9 @@
      rounded-xl w-24 hover:bg-blue-500 hover:text-white border text-center">登出</span>
   </div>
 
-
+  <div class="pingfang flex items-center justify-center  mt-6 text-center pt-32 text-blue-400">
+    <span>如有问题可联系管理员电话15651863050</span>
+  </div>
 </div>
 </template>
 
@@ -95,7 +97,6 @@ function clearToken() {
  
 
 function jump(path,name){
- 
     router.push(path)
 }
 
