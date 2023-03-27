@@ -53,9 +53,11 @@
 
 <script setup>
 import { onMounted, reactive, ref } from "vue";
-import router from "../../router/index.js";
+// import router from "../../router/index.js";
 import axios from "axios";
 import { useMessage, useDialog } from "naive-ui";
+import { useRouter } from "vue-router";
+const router = useRouter()
 const message = useMessage()
 
 //要修改cart

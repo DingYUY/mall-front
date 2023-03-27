@@ -2,7 +2,7 @@
  * @Author: 丁雨阳 dzyyyt@163.com
  * @Date: 2023-01-18 13:21:27
  * @LastEditors: 丁雨阳 dzyyyt@163.com
- * @LastEditTime: 2023-02-22 17:07:36
+ * @LastEditTime: 2023-02-28 10:06:46
  * @Description: 
  * 
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved. 
@@ -71,6 +71,26 @@ const routes = [
         component: () => import("../page/manage/index.vue"),
         name: 'Manage'
       },
+      {
+        path: "/goods_manage",
+        component: () => import("../page/goods_manage/index.vue"),
+        name: 'GoodsManage'
+      },
+      {
+        path: "/myGoods",
+        component: () => import("../page/myGoods/index.vue"),
+        name: 'MyGoods'
+      },
+      {
+        path: "/userSetting",
+        component: () => import("../page/userSetting/index.vue"),
+        name: 'UserSetting'
+      },
+      {
+        path: "/good_edit",
+        component: () => import("../page/good_edit/index.vue"),
+        name: "GoodEdit"
+      }
     ],
   },
 //   {

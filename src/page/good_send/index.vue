@@ -29,11 +29,13 @@
       </n-input-group>
       <n-button-group style="width: 59%;" class="flex items-center mt-4">
         <div class="pingfang_jian mr-6" style="transform: translate(10px,0px);">商品价格</div>
-        <!--     <n-button quaternary @click="add" type="success" round>+</n-button>-->
-        <!--     <div class="p-2">{{msg.price}}</div>-->
-        <!--     <n-button quaternary @click="sub" type="success" round>-</n-button>-->
         <n-input-number v-model:value="msg.price" clearable placeholder="请输入价格" />
       </n-button-group>
+
+      <!-- <n-button-group style="width: 59%;" class="flex items-center mt-4">
+        <div class="pingfang_jian mr-6" style="transform: translate(10px,0px);">商品数量</div>
+        <n-input-number v-model:value="msg.count" clearable placeholder="请输入数量" />
+      </n-button-group> -->
 
       <n-input-group class="flex items-center mt-4 justify-center">
         <div class="pingfang_jian mr-3">商品简介</div>
@@ -41,7 +43,7 @@
       </n-input-group>
 
       <n-input-group class="flex items-center mt-4 justify-center">
-        <div class="pingfang_jian mr-3">发货地址&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+        <div class="pingfang_jian mr-3">发货地址</div>
         <n-input placeholder="请输入发货地址" type="textarea" v-model:value="msg.address" :style="{ width: '50%' }" />
       </n-input-group>
 
@@ -56,8 +58,10 @@
 <script setup>
 import { onMounted, reactive } from "vue";
 import { useMessage, useDialog } from "naive-ui";
-import router from "../../router/index.js";
+// import router from "../../router/index.js";
 import axios from "axios";
+import { useRouter } from "vue-router";
+const router = useRouter()
 const baseURL = "http://127.0.0.1:3175";
 // const baseURL = "http://124.222.246.206:3175";
 const message = useMessage()
@@ -70,7 +74,7 @@ let msg = reactive({
   address: '',
   username: localStorage.getItem('name'),
   user_id: localStorage.getItem('id'),
-
+  // count: 1
 })
 let fileList = reactive([])
 onMounted(() => {
@@ -130,10 +134,11 @@ function updown() {
     img: fileList,
     user_id: localStorage.getItem('id'),
     username: localStorage.getItem('name'),
-    address: msg.address
+    address: msg.address,
+    reviewStatus: 0
   }).then(res => {
     if (res.data.code == 1) {
-      message.success('发布成功')
+      message.success('发布成功, 请等待管理员审核')
       router.push('/')
     }
   })
@@ -145,7 +150,6 @@ function jump(path, name) {
     positiveText: '确定',
     negativeText: '取消',
     onPositiveClick: () => {
-      message.success('发布成功')
       updown()
     },
     onNegativeClick: () => {

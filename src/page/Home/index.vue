@@ -2,7 +2,7 @@
  * @Author: 丁雨阳 dzyyyt@163.com
  * @Date: 2023-01-18 13:21:27
  * @LastEditors: 丁雨阳 dzyyyt@163.com
- * @LastEditTime: 2023-01-28 08:41:48
+ * @LastEditTime: 2023-02-27 16:05:06
  * @Description: 
  * 
  * Copyright (c) 2023 by 丁雨阳 dzyyyt@163.com, All Rights Reserved. 
@@ -25,6 +25,11 @@
         <router-view v-if="demo" class="rounded-r-3xl border-t border-r border-b shadow-2xl w-full  ">
         </router-view>
       </transition>
+      <!-- <router-view v-slot="{ Component, route }" v-if="demo" class="rounded-r-3xl border-t border-r border-b shadow-2xl w-full  ">
+        <transition name="fold-left" mode="in-out">
+          <component :is="Component" :key="route.path"></component>
+        </transition>
+      </router-view> -->
     </div>
     <div class="w-64 ml-1 h-height  rounded-xl border"
       style="background: #fafafa;box-shadow: 0 0 10px rgba(0,0,0,0.1);">

@@ -1,8 +1,8 @@
 <template>
   <div class="w-full p-2 " style="
-  background-image: url('/bg_deatied.png');
-  background-size: cover;
-">
+    background-image: url('/bg_deatied.png');
+    background-size: cover;
+  ">
     <n-button @click="router.back()" class="pingfang  rounded-xl font-bold ">Back</n-button>
 
 
@@ -18,13 +18,32 @@
       <div class="text-xl font-bold text-purple-500">￥{{ shop.price }}</div>
     </div>
 
-    <div class=" w-90_ mx-auto flex items-start pingfang ">
+    <div class=" w-90_ mx-auto flex items-start pingfang " @click="showReviewModal = true" style="cursor: pointer;">
       <img :src="shop.author_img" class="w-12 h-12 rounded-xl object-cover " alt="">
       <div class="text-gray-500 text-xs ml-2 pt-1">
         <div>{{ shop.author }}</div>
-        <div class="text-black pt-3">{{ shop.author_title }}</div>
+        <div class="text-black pt-3 flex items-center"><span>商家信用分：</span><n-rate size="small" allow-half
+            :value="avgScore" readonly></n-rate></div>
       </div>
     </div>
+
+    <div class="w-90_ mx-auto flex items-start pingfang text-xs text-gray-400 mt-3">
+      <div>联系方式: {{ shop.shop_phone }}</div>
+    </div>
+
+    <n-modal v-model:show="showReviewModal" style="max-height: 60vh;" class="custom-card overflow-hidden overflow-y-scroll" preset="card" :style="bodyStyle" title="查看评价" size="huge"
+      :bordered="false" :segmented="segmented">
+      <div v-for="item in allComments.value" :key="item._id" class="pingfang_jian text-sm pb-2 mb-3" style="border-bottom: 1px solid #f0f0f2;">
+        <div class="flex justify-between items-center">
+          <span>评论人:{{ item.observerName }}</span>
+          <div class="flex items-center"><span>评分:</span><n-rate allow-half size="small" :value="item.reviewScore" readonly></n-rate></div>
+        </div>
+        <div>
+          <span>评价：</span>
+          <span class="break-all">{{ item.comment }}</span>
+        </div>
+      </div>
+    </n-modal>
 
     <div class="flex w-full  justify-end shadow-2xl border-t mt-24">
       <div class="w-2/3 p-4 pingfang text-xs">
@@ -32,11 +51,11 @@
         {{ shop.shop_title }}
         <div @click="joinCart" class="flex justify-between mt-12">
           <div class="text-white bg-purple-700 p-2
-           transition cursor-pointer active:scale-50
-           rounded-xl hover:scale-125 " v-if="shop.user_id !== userId">加入购物车</div>
+             transition cursor-pointer active:scale-50
+             rounded-xl hover:scale-125 " v-if="shop.user_id !== userId">加入购物车</div>
           <div class="bg-yellow-400 hover:scale-125
-            transition cursor-pointer active:scale-50
-          p-2 text-white rounded-xl" v-if="shop.user_id !== userId" @click="go_buy(id, '/buy', '支付')">立即购买</div>
+              transition cursor-pointer active:scale-50
+            p-2 text-white rounded-xl" v-if="shop.user_id !== userId" @click="go_buy(id, '/buy', '支付')">立即购买</div>
         </div>
       </div>
     </div>
@@ -44,10 +63,12 @@
 </template>
 
 <script setup>
-import router from "../../router/index.js";
+// import router from "../../router/index.js";
 import { onMounted, reactive, ref } from "vue";
 import axios from "axios";
 import { useMessage, useDialog } from "naive-ui";
+import { useRouter } from "vue-router";
+const router = useRouter()
 const message = useMessage()
 const dialog = useDialog()
 
@@ -66,7 +87,8 @@ let shop = reactive({
   author_title: "这是用户的简介....",
   shop_title: "",
   id,
-  user_id: ''
+  user_id: '',
+  shop_phone: ''
 })
 onMounted(() => {
   id.value = router.currentRoute.value.params.id
@@ -81,11 +103,55 @@ onMounted(() => {
       shop.author = res.data.data[0].username
       shop.author_img = res.data.data[0].user_img
       shop.user_id = res.data.data[0].user_id
+      shop.shop_phone = res.data.data[0].shop_phone
+      computedScore()
     } else {
       return
     }
   })
 })
+
+// 获取所有评价，计算评分
+let allComments = reactive([])
+// 平均评分
+let avgScore = ref()
+const computedScore = () => {
+  axios.post('/getComments', {
+    shop_id: shop.user_id
+  }).then(res => {
+    console.log('所有评价', res.data)
+    if (res.data.code === 1) {
+      allComments.value = res.data.data
+      let scoreArray = []
+      allComments.value.map((item) => {
+        scoreArray.push(Number(item.reviewScore))
+      })
+      console.log('scoreArray', scoreArray)
+      if (scoreArray) {
+        let sum = scoreArray.reduce((preValue, curValue) => {
+          return preValue + curValue
+        }, 0)
+        console.log('和', sum)
+        avgScore.value = sum / scoreArray.length
+      } else {
+        avgScore.value = 0
+      }
+    }
+  })
+}
+
+const showReviewModal = ref(false)
+
+const bodyStyle = {
+  width: "600px"
+}
+
+const segmented = {
+  content: "soft",
+  footer: "soft"
+}
+
+
 
 //切换网页时，重新获取数据
 router.afterEach(() => {
@@ -171,5 +237,9 @@ function jump(path, name, id) {
   width: 100%;
   height: 300px;
   object-fit: cover;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 </style>

@@ -2,7 +2,7 @@
  * @Author: 丁雨阳 dzyyyt@163.com
  * @Date: 2023-01-18 13:21:27
  * @LastEditors: 丁雨阳 dzyyyt@163.com
- * @LastEditTime: 2023-01-28 08:42:09
+ * @LastEditTime: 2023-02-27 10:37:51
  * @Description: 
  * 
  * Copyright (c) 2023 by 丁雨阳 dzyyyt@163.com, All Rights Reserved. 
@@ -12,8 +12,8 @@
     <div @click="get_page_deatile(item.good_id)"
       class="p-2 h-72 mr-8 mb-6 active:scale-50 transition cursor-pointer rounded-xl pingfang  box_neiyin"
       style="background-size: cover;width: 45%;background-position: center;background-repeat: no-repeat"
-      :style="{backgroundImage:`url(${item.img[0]})`}" :class="{'hidden':item.show==false}"
-      v-for="(item,index) in data_obj">
+      :style="{ backgroundImage: `url(${item.img[0]})` }" :class="{ 'hidden': item.show == false }"
+      v-for="(item, index) in data_obj" :key="item._id" v-show="item.reviewStatus === 1">
       <div class="flex h-full flex-col justify-between">
         <div class="flex items-end text-white">
           <img class="w-14 rounded-full h-14 object-cover rounded-xl " :src="item.user_img">
@@ -31,8 +31,10 @@
 
 <script setup>
 import { reactive } from "vue";
-import router from "../../router/index.js";
+// import router from "../../router/index.js";
 import { useMessage, useDialog } from "naive-ui";
+import { useRouter } from "vue-router";
+const router = useRouter()
 const message = useMessage()
 const dialog = useDialog()
 let props = defineProps({

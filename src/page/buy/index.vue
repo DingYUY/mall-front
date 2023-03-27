@@ -38,9 +38,11 @@
 
 <script setup>
 import { onMounted, reactive, ref } from "vue";
-import router from "../../router/index.js";
+// import router from "../../router/index.js";
 import { useMessage, useDialog } from "naive-ui";
 import axios from "axios";
+import { useRouter } from "vue-router";
+const router = useRouter()
 
 let id = ref()
 const message = useMessage()
@@ -49,9 +51,9 @@ let shop = reactive([])
 let sum = ref()
 let address = reactive(
   {
-    name: "张娜英",
-    phone: "123456789",
-    address: "北京市海淀区中关村大街",
+    name: "",
+    phone: "",
+    address: "",
     is_default: true,
     is_del: true
   }
@@ -129,6 +131,7 @@ function updown() {
       goods_id: item.good_id, //商品id
       custorm_address: address.address + '_' + address.phone, //客户地址
       img: item.img, //商品图片
+      buy_count: item.count
     }).then(res => {
     })
   })

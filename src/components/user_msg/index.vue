@@ -2,7 +2,7 @@
  * @Author: 丁雨阳 dzyyyt@163.com
  * @Date: 2023-01-18 13:21:27
  * @LastEditors: 丁雨阳 dzyyyt@163.com
- * @LastEditTime: 2023-02-23 09:51:16
+ * @LastEditTime: 2023-03-22 16:13:27
  * @Description: 
  * 
  * Copyright (c) 2023 by 丁雨阳 dzyyyt@163.com, All Rights Reserved. 
@@ -32,8 +32,7 @@
 
       <div class="w-full h-72 flex flex-col justify-end p-2 bg-purple-700 rounded-xl mt-4"
         @click="get_page_deatile(item.good_id)" :style="{ backgroundImage: `url(${item.img[0]})` }"
-        style="background-size: cover;background-position: center" v-for="(item, index) in arr">
-
+        style="background-size: cover;background-position: center" v-for="(item, index) in arr" :key="item._id" v-show="item.reviewStatus === 1">
 
         <div class="flex justify-between pingfang text-white">
           <div class="pt-3">{{ item.name }}</div>
@@ -51,11 +50,12 @@
 <script setup>
 
 //当网页跳转触发函数
-import router from "../../router/index.js";
+import { useRouter } from "vue-router";
 import { onMounted, reactive, ref } from "vue";
 import { useMessage, useDialog } from "naive-ui";
 
 import axios from "axios";
+const router = useRouter()
 let show = ref(false)
 let name = ref()
 let arr = reactive([])

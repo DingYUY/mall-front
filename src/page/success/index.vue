@@ -2,7 +2,7 @@
  * @Author: 丁雨阳 dzyyyt@163.com
  * @Date: 2023-01-18 13:21:27
  * @LastEditors: 丁雨阳 dzyyyt@163.com
- * @LastEditTime: 2023-01-28 08:41:22
+ * @LastEditTime: 2023-02-27 16:13:13
  * @Description: 
  * 
  * Copyright (c) 2023 by 丁雨阳 dzyyyt@163.com, All Rights Reserved. 
@@ -21,7 +21,9 @@
 
 <script setup>
 import { onMounted } from "vue";
-import router from "../../router/index.js";
+// import router from "../../router/index.js";
+import { useRouter } from "vue-router";
+const router = useRouter()
 
 onMounted(() => {
   setTimeout(() => {

@@ -2,7 +2,7 @@
  * @Author: 丁雨阳 dzyyyt@163.com
  * @Date: 2023-02-07 10:25:49
  * @LastEditors: 丁雨阳 dzyyyt@163.com
- * @LastEditTime: 2023-02-15 14:01:37
+ * @LastEditTime: 2023-03-14 09:43:17
  * @Description: 
  * 
  * Copyright (c) 2023 by ${git_name_email}, All Rights Reserved. 
@@ -50,7 +50,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, reactive, watch, onUnmounted } from 'vue';
+import { ref, onMounted, reactive, watch, onUnmounted, nextTick } from 'vue';
 import { useMessage } from 'naive-ui'
 import axios from 'axios';
 
@@ -91,6 +91,7 @@ const sendMessage = () => {
       token: localStorage.getItem('token')
     }).then(res => {
       console.log('添加数据库', res.data)
+      // getChat()
     })
     console.log('发送：', sendList)
     sendText.value = ''
@@ -101,12 +102,13 @@ const sendMessage = () => {
 
 // 接受信息后客户端处理方法
 ws.onmessage = (res) => {
+  // getChat()
   console.log('接收:', JSON.parse(res.data))
   let receiveList = reactive([])
   receiveList.value = JSON.parse(res.data)
   console.log('receiveList.value', receiveList.value)
   // chatList.push(JSON.parse(res.data))
-  chatList.value = recordList.value.concat(receiveList.value)
+  chatList.value = chatList.value.concat(receiveList.value)
   console.log('recordList', recordList)
   console.log('chatList', chatList.value)
 }
@@ -114,7 +116,7 @@ ws.onmessage = (res) => {
 // 关闭websocket
 ws.onclose = () => {
   console.log('连接已关闭')
-  localStorage.setItem('orderMessage', JSON.stringify({}))
+  // localStorage.setItem('orderMessage', JSON.stringify({}))
 }
 
 onUnmounted(() => {
@@ -132,6 +134,17 @@ let recordList = reactive([])
 
 const chat = ref()
 
+const getChat = () => {
+  axios.post('/getChat', {
+    shop_id: orderMessage.shop_id,
+    user_id: orderMessage.user_id
+  }).then(res => {
+    recordList.value = res.data.data
+    console.log('聊天记录', recordList.value)
+    chatList.value = recordList.value
+  })
+}
+
 onMounted(() => {
   // 商家头像
   axios.post('/getHead', { id: orderMessage.shop_id }).then(res => {
@@ -146,15 +159,12 @@ onMounted(() => {
     // console.log(userName.value)
   })
   // 获取聊天历史记录
-  axios.post('/getChat', {
-    shop_id: orderMessage.shop_id,
-    user_id: orderMessage.user_id
-  }).then(res => {
-    recordList.value = res.data.data
-    console.log('聊天记录', recordList.value)
-    chatList.value = recordList.value
-  })
+  getChat()
 })
+
+// onUpdated(() => {
+//   getChat()
+// })
 
 watch(() => chatList.value, () => {
   nextTick(() => {

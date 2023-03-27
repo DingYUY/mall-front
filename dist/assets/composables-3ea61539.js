@@ -1,1 +1,0 @@
-import{a as r}from"./context-622e1fe5.js";import{t as i}from"./create-injection-key-b5917821.js";import{i as t}from"./runtime-core.esm-bundler-7390d31c.js";function l(){const o=t(r,null);return o===null&&i("use-dialog","No outer <n-dialog-provider /> founded."),o}export{l as u};
